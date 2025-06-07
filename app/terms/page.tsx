@@ -52,90 +52,85 @@ export default function Terms() {
             <p>Effective Date: March 14, 2024</p>
 
             <p className="text-white/90">
-              Welcome to Habit Mirror! By using our app, you agree to these
-              Terms and Conditions.
+              Welcome to Habit Mirror! These Terms & Conditions outline your
+              rights and responsibilities when using our app.
             </p>
 
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
-                1. Use of the App
+                1. Acceptance of Terms
               </h2>
               <p>
-                You may use Habit Mirror to track your personal habits visually.
-                You agree not to misuse the app or upload harmful or illegal
-                content.
+                By using Habit Mirror, you agree to these terms. If you
+                don&apos;t agree, please don&apos;t use the app.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
-                2. User-Generated Content
+                2. Using Our App
+              </h2>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>You must be at least 13 years old to use Habit Mirror</li>
+                <li>
+                  You&apos;re responsible for maintaining your account security
+                </li>
+                <li>
+                  Don&apos;t misuse our services or try to access them through
+                  unauthorized means
+                </li>
+              </ul>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
+                3. Your Content
               </h2>
               <p>
-                You own the photos and content you upload. By uploading, you
-                grant us permission to store and display it only within your
-                account.
+                The photos you upload remain yours. You give us permission to
+                store and display them within the app for your personal use.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
-                3. Account
+                4. Account Terms
+              </h2>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Keep your account information accurate and up-to-date</li>
+                <li>You can delete your account and data at any time</li>
+                <li>We may suspend accounts that violate our terms</li>
+              </ul>
+            </section>
+
+            <section className="space-y-4">
+              <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
+                5. Changes to Terms
               </h2>
               <p>
-                You are responsible for maintaining the confidentiality of your
-                account. Don't share your login with others.
+                We may update these terms. We&apos;ll notify you of significant
+                changes through the app or email.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
-                4. Modifications
+                6. &quot;As Is&quot; Service
               </h2>
               <p>
-                We may update or modify the app at any time. We'll notify you of
-                major changes that affect your use.
+                Habit Mirror is provided &quot;as is&quot; without warranties of
+                any kind, either express or implied.
               </p>
             </section>
 
             <section className="space-y-4">
               <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
-                5. Termination
+                7. Contact
               </h2>
               <p>
-                You can delete your account at any time. We may suspend your
-                access if you're found violating these terms.
-              </p>
-            </section>
-
-            <section className="space-y-4">
-              <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
-                6. Liability
-              </h2>
-              <p>
-                Habit Mirror is provided "as is." We are not liable for any loss
-                or damage resulting from your use of the app.
-              </p>
-            </section>
-
-            <section className="space-y-4">
-              <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
-                7. Governing Law
-              </h2>
-              <p>
-                These terms are governed by the laws of California, United
-                States.
-              </p>
-            </section>
-
-            <section className="space-y-4">
-              <h2 className="text-2xl font-semibold text-white mt-8 mb-4">
-                8. Contact
-              </h2>
-              <p>
-                For any concerns, email{" "}
+                Questions about these terms? Email us at{" "}
                 <a
-                  href="mailto:hello@habitmirror.com"
+                  href="mailto:info@habitmirror.app"
                   className="text-[#FF9500] hover:underline"
                 >
                   info@habitmirror.app

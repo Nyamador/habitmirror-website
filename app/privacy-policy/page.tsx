@@ -28,7 +28,7 @@ export default function PrivacyPolicy() {
           <div className="flex gap-2 items-center">
             <Link
               href="/privacy-policy"
-              className=" hover:text-[#FF9500]  text-[#FF9500] transition-colors py-1 px-2 rounded-full"
+              className="hover:text-[#FF9500] text-[#FF9500] transition-colors py-1 px-2 rounded-full"
             >
               Privacy Policy
             </Link>
@@ -52,9 +52,10 @@ export default function PrivacyPolicy() {
             <p>Effective Date: March 14, 2024</p>
 
             <p className="text-white/90">
-              Habit Mirror ("we", "our", or "us") respects your privacy. This
-              Privacy Policy explains how we collect, use, and protect your
-              information when you use our mobile app.
+              Habit Mirror (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;)
+              respects your privacy. This Privacy Policy explains how we
+              collect, use, and protect your information when you use our mobile
+              app.
             </p>
 
             <section className="space-y-4">
@@ -129,8 +130,8 @@ export default function PrivacyPolicy() {
                 6. Changes
               </h2>
               <p>
-                We may update this policy. We'll notify you of major changes via
-                the app or email.
+                We may update this policy. We&apos;ll notify you of major
+                changes via the app or email.
               </p>
             </section>
 
@@ -141,7 +142,7 @@ export default function PrivacyPolicy() {
               <p>
                 Questions? Email us at{" "}
                 <a
-                  href="mailto:hello@habitmirror.com"
+                  href="mailto:info@habitmirror.app"
                   className="text-[#FF9500] hover:underline"
                 >
                   info@habitmirror.app
