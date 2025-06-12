@@ -103,10 +103,35 @@ export default function Home() {
       </div>
       <main className="min-h-screen flex flex-col">
         {/* Hero Section */}
-        <div className="flex items-center justify-center px-4 md:px-8 lg:px-12 min-h-screen">
-          <div className="max-w-7xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-end md:items-center relative pb-0">
-            {/* Phone Mockup */}
-            <div className="relative w-full max-w-[360px] mx-auto translate-y-8 md:translate-y-20">
+        <div className="flex items-center justify-center px-4 md:px-8 lg:px-12 min-h-screen pt-24 md:pt-0">
+          <div className="max-w-7xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-end md:items-center relative">
+            {/* Content - Now first on mobile */}
+            <div className="text-left md:self-center order-2 md:order-1 pb-8 md:pb-0">
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
+              >
+                You&apos;ll wish you started 3 months ago. One photo a day —
+                that&apos;s all it takes.
+              </motion.h1>
+              <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                <div className="inline-flex items-center justify-center bg-white text-black px-6 py-2.5 rounded-xl hover:bg-white/90 transition-colors text-sm font-medium">
+                  <Image
+                    src="/apple_black.svg"
+                    alt="Apple Logo"
+                    width={14}
+                    height={14}
+                    className="mr-2"
+                  />
+                  Coming soon for iOS
+                </div>
+              </div>
+            </div>
+
+            {/* Phone Mockup - Now second on mobile */}
+            <div className="relative w-full max-w-[360px] mx-auto order-1 md:order-2 translate-y-8 md:translate-y-20">
               {/* Screen Content */}
               <div className="absolute top-[3%] left-[3%] right-[3%] bottom-[1%] rounded-[38px] overflow-hidden">
                 <AnimatePresence mode="wait">
@@ -137,31 +162,6 @@ export default function Home() {
                 className="w-full h-auto relative z-10"
                 priority
               />
-            </div>
-
-            {/* Content */}
-            <div className="text-left md:self-center pb-8 md:pb-0">
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
-              >
-                You&apos;ll wish you started 3 months ago. One photo a day —
-                that&apos;s all it takes.
-              </motion.h1>
-              <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                <div className="inline-flex items-center justify-center bg-white text-black px-6 py-2.5 rounded-xl hover:bg-white/90 transition-colors text-sm font-medium">
-                  <Image
-                    src="/apple_black.svg"
-                    alt="Apple Logo"
-                    width={14}
-                    height={14}
-                    className="mr-2"
-                  />
-                  Coming soon for iOS
-                </div>
-              </div>
             </div>
           </div>
         </div>
