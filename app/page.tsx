@@ -113,7 +113,7 @@ export default function Home() {
                 transition={{ duration: 0.8 }}
                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight"
               >
-                You&apos;ll wish you started 3 months ago. One photo a day —
+                You&apos;ll wish you started 3 months ago. One photo a day,
                 that&apos;s all it takes.
               </motion.h1>
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
@@ -172,7 +172,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <AnimatedText>
               Most people never realize how far they&apos;ve come because they
-              never track it — capture your daily effort with one photo, and
+              never track it. Capture your daily effort with one photo, and
               finally see the transformation you&apos;ve been blind to.
             </AnimatedText>
           </div>
@@ -181,7 +181,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <AnimatedText>
               Six months from now, you&apos;ll either have a gallery full of
-              progress or nothing but excuses — start now so you never have to
+              progress or nothing but excuses. Start now so you never have to
               wonder what could&apos;ve happened if you stayed consistent.
             </AnimatedText>
           </div>
@@ -190,7 +190,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto">
             <AnimatedText>
               The only difference between you and the ones who stuck with it is
-              proof — document every small win daily, so you stop losing to the
+              proof. Document every small win daily, so you stop losing to the
               version of you that quits.
             </AnimatedText>
           </div>
