@@ -1,47 +1,10 @@
-import Image from "next/image"
-import Link from "next/link"
+import NavBar from "../components/NavBar"
+
 
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-[#111111] text-white relative">
-      {/* Gradient Banner */}
-      <div
-        className="absolute top-0 left-0 right-0 h-[100px] bg-gradient-to-b from-[#FFB238]/20 via-[#FF9500]/10 to-transparent"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(255,178,56,0.15) 0%, rgba(255,149,0,0.05) 50%, rgba(255,149,0,0) 100%)",
-        }}
-      />
-
-      {/* Navigation */}
-      <div className="fixed top-6 left-0 right-0 flex justify-center z-50">
-        <nav className="backdrop-blur-md bg-black/30 rounded-full px-4 py-1 flex items-center gap-2">
-          <Link href="/">
-            <Image
-              src="/habitmirror.svg"
-              alt="HabitMirror Logo"
-              width={20}
-              height={20}
-              className="text-[#FF9500]"
-            />
-          </Link>
-          <div className="flex gap-2 items-center">
-            <Link
-              href="/privacy-policy"
-              className="hover:text-[#FF9500] text-[#FF9500] transition-colors py-1 px-2 rounded-full"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-white/90 hover:text-[#FF9500] py-1 px-2 rounded-full"
-            >
-              Terms of Service
-            </Link>
-          </div>
-        </nav>
-      </div>
-
+      <NavBar />
       {/* Content */}
       <div className="pt-32 pb-20 px-4">
         <div className="max-w-3xl mx-auto">

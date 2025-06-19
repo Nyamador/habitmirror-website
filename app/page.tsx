@@ -4,14 +4,14 @@ import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import AnimatedText from "./components/AnimatedText"
-import { Menu, X } from "lucide-react"
 import { useState, useEffect } from "react"
-import ContactModal from "./components/ContactModal"
+
+import NavBar from "./components/NavBar"
+import posthog from "posthog-js"
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [isContactOpen, setIsContactOpen] = useState(false)
+
   const demoImages = ["/demo1.png", "/demo2.png", "/demo3.png"]
 
   useEffect(() => {
@@ -24,83 +24,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#111111] flex flex-col">
-      <div className="fixed top-6 left-0 right-0 flex justify-center z-50">
-        <nav className="backdrop-blur-md bg-black/30 rounded-full px-4 py-3 flex items-center justify-between w-[90%] max-w-lg relative">
-          <Link href="/" className="z-20">
-            <Image
-              src="/habitmirror.svg"
-              alt="HabitMirror Logo"
-              width={30}
-              height={30}
-              className="text-[#FF9500]"
-            />
-          </Link>
+      <NavBar />
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex gap-2 items-center">
-            <button
-              onClick={() => setIsContactOpen(true)}
-              className="text-white/90 hover:text-[#FF9500] transition-colors py-2 px-6 rounded-full text-sm"
-            >
-              Contact
-            </button>
-            <Link
-              href="/privacy-policy"
-              className="text-white/90 hover:text-[#FF9500] transition-colors py-2 px-6 rounded-full text-sm"
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-white/90 hover:text-[#FF9500] transition-colors py-2 px-6 rounded-full text-sm"
-            >
-              Terms of Service
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden z-20 text-white/90 hover:text-white transition-colors"
-          >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-
-          {/* Mobile Menu Overlay */}
-          <motion.div
-            initial={false}
-            animate={{
-              opacity: isMenuOpen ? 1 : 0,
-              pointerEvents: isMenuOpen ? "auto" : "none",
-            }}
-            className="absolute top-0 left-0 right-0 backdrop-blur-md bg-black/95 rounded-2xl py-16 px-4 flex flex-col items-center gap-4 md:hidden"
-          >
-            <button
-              onClick={() => {
-                setIsContactOpen(true)
-                setIsMenuOpen(false)
-              }}
-              className="text-white/90 hover:text-[#FF9500] transition-colors py-2 px-6 rounded-full text-lg"
-            >
-              Contact
-            </button>
-            <Link
-              href="/privacy-policy"
-              className="text-white/90 hover:text-[#FF9500] transition-colors py-2 px-6 rounded-full text-lg"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Privacy Policy
-            </Link>
-            <Link
-              href="/terms"
-              className="text-white/90 hover:text-[#FF9500] transition-colors py-2 px-6 rounded-full text-lg"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Terms of Service
-            </Link>
-          </motion.div>
-        </nav>
-      </div>
       <main className="min-h-screen flex flex-col">
         {/* Hero Section */}
         <div className="flex items-center justify-center px-4 md:px-8 lg:px-12 min-h-screen pt-24 md:pt-0">
@@ -117,7 +42,14 @@ export default function Home() {
                 that&apos;s all it takes.
               </motion.h1>
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                <div className="inline-flex items-center justify-center bg-white text-black px-6 py-2.5 rounded-xl hover:bg-white/90 transition-colors text-sm font-medium">
+                <Link
+                  target="_blank"
+                  href="https://apps.apple.com/app/habitmirror/id6746387795"
+                  className="inline-flex items-center justify-center bg-white text-black px-6 py-2.5 rounded-xl hover:bg-white/90 transition-colors text-sm font-medium"
+                  onClick={() =>
+                    posthog.capture("open_app_store", { platform: "iOS" })
+                  }
+                >
                   <Image
                     src="/apple_black.svg"
                     alt="Apple Logo"
@@ -125,8 +57,8 @@ export default function Home() {
                     height={14}
                     className="mr-2"
                   />
-                  Coming soon for iOS
-                </div>
+                  Available on the App Store
+                </Link>
               </div>
             </div>
 
@@ -214,9 +146,13 @@ export default function Home() {
 
           <div className="flex flex-col md:flex-row items-center gap-8">
             <div className="flex gap-4">
-              <div
-                // href="https://apps.apple.com"
+              <Link
+                target="_blank"
+                href="https://apps.apple.com/app/habitmirror/id6746387795"
                 className="inline-flex items-center justify-center bg-white text-black px-6 py-2.5 rounded-xl hover:bg-white/90 transition-colors text-sm font-medium"
+                onClick={() =>
+                  posthog.capture("open_app_store", { platform: "iOS" })
+                }
               >
                 <Image
                   src="/apple_black.svg"
@@ -225,8 +161,8 @@ export default function Home() {
                   height={14}
                   className="mr-2"
                 />
-                Coming soon
-              </div>
+                Available on the App Store
+              </Link>
             </div>
 
             <div className="flex items-center gap-6">
@@ -272,11 +208,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-
-      <ContactModal
-        isOpen={isContactOpen}
-        onClose={() => setIsContactOpen(false)}
-      />
     </div>
   )
 }
