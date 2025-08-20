@@ -4,30 +4,9 @@ import HabitFetcher from "@/app/components/HabitInvite"
 import { sendGTMEvent } from "@next/third-parties/google"
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { use, useState } from "react"
 
-// import type { Metadata } from "next"
-
-// export function generateMetadata({
-//   params,
-// }: {
-//   params: { id: string }
-// }): Metadata {
-//   const inviteId = params.id
-//   const iosAppId = process.env.NEXT_PUBLIC_IOS_APP_ID || "6746387795"
-//   const appDomain = process.env.NEXT_PUBLIC_APP_DOMAIN || "habitmirror.app"
-
-//   // Use a universal link if your iOS app has Associated Domains set up; otherwise your custom scheme.
-//   const deepLink = `https://${appDomain}/i/${inviteId}`
-
-//   return {
-//     other: {
-//       "apple-itunes-app": `app-id=${iosAppId}, app-argument=${deepLink}`,
-//     },
-//   }
-// }
-
-const InvitePage = async ({ params }: { params: Promise<{ id: string }> }) => {
+const InvitePage = ({ params }: { params: Promise<{ id: string }> }) => {
   const [data, setData] = useState<{
     type: "invite_acceptance"
     habit_id: string
@@ -35,7 +14,7 @@ const InvitePage = async ({ params }: { params: Promise<{ id: string }> }) => {
     inviter_id: string
     inviter_name: string
   } | null>(null)
-  const { id } = await params
+  const { id } = use(params)
 
   return (
     <main className="min-h-screen bg-black text-white relative pt-10">

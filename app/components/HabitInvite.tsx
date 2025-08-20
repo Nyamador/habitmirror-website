@@ -77,8 +77,9 @@ const HabitFetcher = async ({
           {data.data.habit.name}
         </h1>
         <p className="text-xs text-[#D1D1D1]">
-          I'm tracking my {data.data.habit.name} streak on HabitMirror. Join me
-          and we'll check in daily with photos to keep each other accountable.
+          I&apos;m tracking my {data.data.habit.name} streak on HabitMirror.
+          Join me and we&apos;ll check in daily with photos to keep each other
+          accountable.
           <br />
           <br />
           Invited by {data.data.invited_by.first_name}{" "}
