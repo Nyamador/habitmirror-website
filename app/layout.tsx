@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
-import { PostHogProvider } from "./components/provider"
+import { GoogleAnalytics } from "@next/third-parties/google"
+
 import "./globals.css"
 
 const geistSans = Geist({
@@ -25,14 +26,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <PostHogProvider>
-      <html lang="en" className="dark">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          {children}
-        </body>
-      </html>
-    </PostHogProvider>
+    <html lang="en" className="dark">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID ?? ""} />
+        {children}
+      </body>
+    </html>
   )
 }
