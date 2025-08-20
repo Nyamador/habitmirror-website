@@ -1,9 +1,10 @@
-import { Button } from "@/app/components/ui/button"
-import Link from "next/link"
-import Image from "next/image"
-import { Geist } from "next/font/google"
+"use client"
+
 import HabitFetcher from "@/app/components/HabitInvite"
 import { sendGTMEvent } from "@next/third-parties/google"
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
 
 // import type { Metadata } from "next"
 
@@ -26,13 +27,14 @@ import { sendGTMEvent } from "@next/third-parties/google"
 //   }
 // }
 
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist",
-  weight: ["400", "500", "600", "700"],
-})
-
 const InvitePage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const [data, setData] = useState<{
+    type: "invite_acceptance"
+    habit_id: string
+    invite_id: string
+    inviter_id: string
+    inviter_name: string
+  } | null>(null)
   const { id } = await params
 
   return (
@@ -53,7 +55,7 @@ const InvitePage = async ({ params }: { params: Promise<{ id: string }> }) => {
           height={46}
         />
         <div className="flex flex-col gap-1">
-          <HabitFetcher id={id} />
+          <HabitFetcher id={id} onData={setData} />
         </div>
 
         <Link
@@ -64,7 +66,13 @@ const InvitePage = async ({ params }: { params: Promise<{ id: string }> }) => {
               invite_id: id,
             })
           }}
-          href="habitmirror://?flow=invite_acceptance&habitId=123&userId=456"
+          href={`habitmirror://?${new URLSearchParams({
+            type: "invite_acceptance",
+            habit_id: data?.habit_id ?? "",
+            invite_id: data?.invite_id ?? "",
+            inviter_id: data?.inviter_id ?? "",
+            inviter_name: data?.inviter_name ?? "",
+          }).toString()}`}
         >
           Join & Accept Invite
         </Link>

@@ -1,6 +1,18 @@
-import type { Metadata } from "next"
-
-const HabitFetcher = async ({ id }: { id: string }) => {
+const HabitFetcher = async ({
+  id,
+  onData,
+}: {
+  id: string
+  onData: (
+    data: {
+      type: "invite_acceptance"
+      habit_id: string
+      invite_id: string
+      inviter_id: string
+      inviter_name: string
+    } | null
+  ) => void
+}) => {
   const apiBaseUrl = process.env.NEXT_API_URL
   const apiKey = process.env.NEXT_API_AUTH_SECRET
 
@@ -27,20 +39,38 @@ const HabitFetcher = async ({ id }: { id: string }) => {
 
     const data = (await response.json()) as {
       data: {
-        name: string
-        habit: {
-          name: string
-        }
+        id: string
+        habit_id: string
         invited_by: {
+          id: string
           first_name: string
           last_name: string
+        }
+        email: string | null
+        user_id: string
+        status: string
+        token: string | null
+        expires_at: string | null
+        accepted_at: string | null
+        updated_at: string
+        created_at: string
+        habit: {
+          id: string
+          name: string
         }
       }
     }
 
     if (!data) return null
 
-    console.log("data", data)
+    onData({
+      type: "invite_acceptance",
+      habit_id: data.data.habit_id,
+      invite_id: data.data.id,
+      inviter_id: data.data.invited_by.id,
+      inviter_name: `${data.data.invited_by.first_name} ${data.data.invited_by.last_name}`,
+    })
+
     return (
       <div>
         <h1 className="text-[24px] font-extrabold leading-snug">
