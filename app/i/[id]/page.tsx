@@ -10,8 +10,8 @@ type InviteResponse = {
   }
 }
 
-const InvitePage = async ({ params }: { params: { id: string } }) => {
-  const id = params.id
+const InvitePage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params
   const apiBaseUrl = process.env.NEXT_API_URL
   const apiKey = process.env.NEXT_API_AUTH_SECRET
 
