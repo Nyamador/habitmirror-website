@@ -1,20 +1,46 @@
-"use client"
-
-import HabitFetcher from "@/app/components/HabitInvite"
-import { sendGTMEvent } from "@next/third-parties/google"
+import TrackingCta from "@/app/components/TrackingCta"
 import Image from "next/image"
-import Link from "next/link"
-import { use, useState } from "react"
 
-const InvitePage = ({ params }: { params: Promise<{ id: string }> }) => {
-  const [data, setData] = useState<{
-    type: "invite_acceptance"
+type InviteResponse = {
+  data: {
+    id: string
     habit_id: string
-    invite_id: string
-    inviter_id: string
-    inviter_name: string
-  } | null>(null)
-  const { id } = use(params)
+    invited_by: { id: string; first_name: string; last_name: string }
+    habit: { id: string; name: string }
+  }
+}
+
+const InvitePage = async ({ params }: { params: { id: string } }) => {
+  const id = params.id
+  const apiBaseUrl = process.env.NEXT_API_URL
+  const apiKey = process.env.NEXT_API_AUTH_SECRET
+
+  let invite: InviteResponse | null = null
+
+  if (apiBaseUrl) {
+    try {
+      const res = await fetch(`${apiBaseUrl}/invites/details/${id}`, {
+        next: { revalidate: 60 },
+        headers: apiKey ? { Authorization: `Bearer ${apiKey}` } : undefined,
+      })
+      if (res.ok) {
+        invite = (await res.json()) as InviteResponse
+      }
+    } catch {
+      // ignore and show fallback UI
+    }
+  }
+
+  const deepLinkParams = new URLSearchParams({
+    type: "invite_acceptance",
+    habit_id: invite?.data.habit_id ?? "",
+    invite_id: invite?.data.id ?? "",
+    inviter_id: invite?.data.invited_by.id ?? "",
+    habit_name: invite?.data.habit.name ?? "",
+    inviter_name: invite
+      ? `${invite.data.invited_by.first_name} ${invite.data.invited_by.last_name}`
+      : "",
+  })
 
   return (
     <main className="min-h-screen bg-black text-white relative pt-10">
@@ -34,27 +60,31 @@ const InvitePage = ({ params }: { params: Promise<{ id: string }> }) => {
           height={46}
         />
         <div className="flex flex-col gap-1">
-          <HabitFetcher id={id} onData={setData} />
+          <h1 className="text-[24px] font-extrabold leading-snug">
+            {invite?.data.habit.name ?? "Habit invite"}
+          </h1>
+          <p className="text-xs text-[#D1D1D1]">
+            {invite?.data.habit.name
+              ? `I\'m tracking my ${invite.data.habit.name} streak on HabitMirror. Join me and we\'ll check in daily with photos to keep each other accountable.`
+              : `Join me on HabitMirror and we\'ll check in daily with photos to keep each other accountable.`}
+            <br />
+            <br />
+            {invite
+              ? `Invited by ${invite.data.invited_by.first_name} ${invite.data.invited_by.last_name}`
+              : ""}
+          </p>
         </div>
 
-        <Link
-          className="bg-white w-full text-black rounded-full  text-sm font-bold text-center h-[45px] flex items-center justify-center mt-4"
-          onClick={() => {
-            sendGTMEvent({
-              event: "invite_accepted",
-              invite_id: id,
-            })
+        <TrackingCta
+          href={`habitmirror://?${deepLinkParams.toString()}`}
+          event={{
+            event: "invite_accepted",
+            invite_id: invite?.data.id ?? id,
           }}
-          href={`habitmirror://?${new URLSearchParams({
-            type: "invite_acceptance",
-            habit_id: data?.habit_id ?? "",
-            invite_id: data?.invite_id ?? "",
-            inviter_id: data?.inviter_id ?? "",
-            inviter_name: data?.inviter_name ?? "",
-          }).toString()}`}
+          className="bg-white w-full text-black rounded-full  text-sm font-bold text-center h-[45px] flex items-center justify-center mt-4"
         >
           Join & Accept Invite
-        </Link>
+        </TrackingCta>
       </div>
     </main>
   )
