@@ -1,18 +1,24 @@
 "use client"
 
+import { AnimatePresence, motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useState } from "react"
 import AnimatedText from "./components/AnimatedText"
-import { useState, useEffect } from "react"
 
-import NavBar from "./components/NavBar"
 import posthog from "posthog-js"
+import NavBar from "./components/NavBar"
 
 export default function Home() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  const demoImages = ["/demo1.png", "/demo2.png", "/demo3.png"]
+  const demoImages = [
+    "/demo1.png",
+    "/demo2.png",
+    "/demo3.png",
+    "/demo4.png",
+    "/demo5.png",
+  ]
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -90,7 +96,7 @@ export default function Home() {
                 src="/mobile.png"
                 alt="HabitMirror App"
                 width={400}
-                height={600}
+                height={560}
                 className="w-full h-auto relative z-10"
                 priority
               />
